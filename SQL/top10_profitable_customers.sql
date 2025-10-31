@@ -6,18 +6,9 @@
 -- Customer CTE
 WITH customer AS
 	(SELECT
-		o.order_id,
-		o.order_date,
-		o.ship_date,
-		o.ship_mode,
 		o.customer_id,
-		o.product_id,
-		o.postal_code,
 		c.customer_name,
 		c.segment,
-		o.sales,
-		o.quantity,
-		o.discount,
 		o.profit
 	FROM orders	AS o
 		INNER JOIN customers AS c
@@ -26,20 +17,9 @@ WITH customer AS
 -- Product CTE
 product AS
 	(SELECT
-		o.order_id,
-		o.order_date,
-		o.ship_date,
-		o.ship_mode,
 		o.customer_id,
 		o.product_id,
-		o.postal_code,
-		p.product_name,
-		p.category,
-		p.sub_category,
-		o.sales,
-		o.quantity,
-		o.discount,
-		o.profit
+		p.category
 	FROM orders	AS o
 		INNER JOIN products AS p
 			ON o.product_id = p.product_id),

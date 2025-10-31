@@ -6,19 +6,9 @@
 -- Location CTE
 WITH location AS
 	(SELECT
-		o.order_id,
-		o.order_date,
-		o.ship_date,
-		o.ship_mode,
-		o.customer_id,
-		o.product_id,
-		o.postal_code,
 		l.city,
 		l.state,
 		l.region,
-		o.sales,
-		o.quantity,
-		o.discount,
 		o.profit
 	FROM orders	AS o
 		INNER JOIN locations AS l
