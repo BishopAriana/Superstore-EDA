@@ -1,4 +1,9 @@
--- customer CTE
+/*
+ * Query to take a look at the Top 10 Customers by Total Profit: identify these 10 customers by name
+ * and find the product category that these 10 customers order from the most.
+ */
+ 
+-- Customer CTE
 WITH customer AS
 	(SELECT
 		o.order_id,
@@ -15,10 +20,10 @@ WITH customer AS
 		o.discount,
 		o.profit
 	FROM orders	AS o
-		LEFT JOIN customers AS c
+		INNER JOIN customers AS c
 			ON o.customer_id = c.customer_id),
 
--- product CTE
+-- Product CTE
 product AS
 	(SELECT
 		o.order_id,
@@ -36,10 +41,12 @@ product AS
 		o.discount,
 		o.profit
 	FROM orders	AS o
-		LEFT JOIN products AS p
+		INNER JOIN products AS p
 			ON o.product_id = p.product_id),
 
--- TOP 10 Profit: Customer Analysis ----------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------------------------
+-- TOP 10 Profit: Customer Analysis ------------------------------------------------------------
+-- ---------------------------------------------------------------------------------------------
 
 -- Name the top 10 overall customers by profit
 top10_profit_customers AS
@@ -56,7 +63,7 @@ top10_profit_customers AS
 /*
  * IN ORDER: Tamara Chand, Raymond Buch, Sajit Chand, Hunter Lopez, Adrian Barton
  * Tom Ashbrook, Christopher Martinez, Keith Dawkins, Andy Reiter, Daniel Raglin
- * -Most are in the Consumers customer segment-
+ *    -Most are in the Consumers customer segment-
  */
 
 -- What category did those top 10 customers purchase from the most?

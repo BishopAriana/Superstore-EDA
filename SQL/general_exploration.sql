@@ -1,4 +1,11 @@
+/*
+ * A collection of simple queries in order to learn a bit about the data set (unique dimension
+ * values, date range/timespan, and basic aggregations).
+ */
+
+-- ---------------------------------------------------------------------------------------------
 -- Identify unique values in dimensions --------------------------------------------------------
+-- ---------------------------------------------------------------------------------------------
 
 SELECT DISTINCT
 	ship_mode
@@ -60,7 +67,9 @@ FROM products
 ORDER BY sub_category;
 -- 17 Unique Sub_categories
 
--- General Data Exploration --------------------------------------------------------
+-- ---------------------------------------------------------------------------------------------
+-- General Data Exploration --------------------------------------------------------------------
+-- ---------------------------------------------------------------------------------------------
 
 -- First and Last order_date and ship_date
 SELECT
@@ -85,7 +94,7 @@ FROM
  * The time span for this dataset is about 4 years.
  */
 
--- Basic Aggregation --
+-- Basic Aggregations --
 SELECT -- Formatting
 	CONCAT('$', to_char(total_sales, 'FM9,999,999,999.99')) AS total_sales,
 	CONCAT('$', to_char(avg_sales, 'FM9,999,999,999.99')) AS avg_sales,
@@ -115,7 +124,7 @@ FROM
  */
 
 -- A look at these measures across different dimensions --
--- ship_mode
+-- Ship Mode
 SELECT -- Formatting
 	ship_mode,
 	CONCAT('$', to_char(total_sales, 'FM9,999,999,999.99')) AS total_sales,
@@ -140,7 +149,7 @@ FROM
 	ORDER BY total_profit DESC) AS subq;
 -- Order from highest to lowest total profit: Standard Class, Second Class, First Class, Same Day
 
--- customer_segment
+-- Customer Segment
 SELECT -- Formatting
 	segment,
 	CONCAT('$', to_char(total_sales, 'FM9,999,999,999.99')) AS total_sales,
@@ -167,7 +176,7 @@ FROM
 	ORDER BY total_profit DESC) AS subq;
 -- Order from highest to lowest total profit: Consumer, Corporate, Home Office
 
--- city
+-- City
 SELECT -- Formatting
 	city,
 	CONCAT('$', to_char(total_sales, 'FM9,999,999,999.99')) AS total_sales,
@@ -198,7 +207,7 @@ FROM
  */
 
 
--- state
+-- State
 SELECT -- Formatting
 	state,
 	CONCAT('$', to_char(total_sales, 'FM9,999,999,999.99')) AS total_sales,
@@ -228,7 +237,7 @@ FROM
  * Least Profitable State: Texas
  */
 
--- region
+-- Region
 SELECT -- Formatting
 	region,
 	CONCAT('$', to_char(total_sales, 'FM9,999,999,999.99')) AS total_sales,
@@ -255,7 +264,7 @@ FROM
 	ORDER BY total_profit DESC) AS subq;
 -- Order from highest to lowest total profit: West, East, South, Central
 
--- product
+-- Product
 SELECT -- Formatting
 	product_name,
 	CONCAT('$', to_char(total_sales, 'FM9,999,999,999.99')) AS total_sales,
@@ -285,7 +294,7 @@ FROM
  * Least Profitable Product: Cubify CubeX 3D Printer Double Head Print
  */
 
--- category
+-- Product Category
 SELECT -- Formatting
 	category,
 	CONCAT('$', to_char(total_sales, 'FM9,999,999,999.99')) AS total_sales,
@@ -312,7 +321,7 @@ FROM
 	ORDER BY total_profit DESC) AS subq;
 -- Order from highest to lowest total profit: Technology, Office Supplies, Furniture
 
--- sub_category
+-- Product Subcategory
 SELECT -- Formatting
 	sub_category,
 	CONCAT('$', to_char(total_sales, 'FM9,999,999,999.99')) AS total_sales,
