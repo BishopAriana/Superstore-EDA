@@ -44,7 +44,7 @@ The Furniture needs to be investigated in more detail. The first and second and 
 ![Image of the YoY Region Chart](/Images/YoY_Category_Chart.png)
 
 # Products
-I found the Top and Botton 10 products overall by both sales and profit. You can see in the Bottom 10 by Profit Chart [here](/Images/Bottom10_Products_Profit.png) that the majority of these products each year are in the Furniture category. Most of them are Tables.
+I found the Top 10 and Botton 10 products overall by both sales and profit. You can see in the Bottom 10 by Profit Chart [here](/Images/Bottom10_Products_Profit.png) that the majority of these products each year are in the Furniture category. Most of them are Tables. At the same time, none of the [bottom 10 products by sales](/Images/Bottom10_Products_Sales.png) have ever been a Furniture Product (it's mostly office supplies). Most of the top 10 products by [sales](/Images/Top10_Products_Sales.png) AND by [profit](/Images/Top10_Products_Profit.png) are in the Technology category. These are printers, copiers, and communication devices (phones and headsets). However, the interesting thing is that there are some Furniture products that are in the top 10 sales and profit, so I think there's something else that might be causing the massive profit loss in the Furniture category. We should narrow down the problem instead of avoiding the Furniture category altogether, and I recommend looking at the customer segment, the discount, and the quanities of Furniture orders.
 
 ---
 
@@ -53,6 +53,7 @@ I found the Top and Botton 10 products overall by both sales and profit. You can
 * Look deeper into the Corporate customers' orders to see why exactly there's a loss in profit
 * Look deeper into the Central and South regions to see if it's connected to the Corporate customer segment
 * Look into the East and West regions to see what is contributing to the high profits
-* find the cause of the extreme YoY changes in the Furniture product category
+* Find the cause of the extreme YoY changes in the Furniture product category
+* See how the discount and quantities factor into any growth and losses
 
 
