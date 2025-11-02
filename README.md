@@ -28,11 +28,31 @@ support my findings.
 ---
 
 ## Results and Business Recommendations
+# Customer Segment
+We need to re-evaluate our sales to our Corporate customer segment. It is the only segment to have a decrease in profit at all (this year - 2018), and the loss occured even with a 16% increase in Total Sales. The other two customer segments are both in the green; however, the Home Office segment had significant positive increase both last year (2017) and this year (2018). We should focus on maintaining our positive growth in the Home Office segment, and look into areas we can focus on to have greater growth in the Consumer segment next year.
 
+![Image of the YoY Customer Segment Chart](/Images/YoY_Segment_Chart.png)
+
+# Region
+Futher analysis needs to be done here. The South and Central regions saw significant decrease in profits (with the Central region also seeing a slight decrease in sales). The growth patteern in the South region is similar to the growth pattern of the Corporate customer segment, so it should be investigateed further if the removal of the Corporate customer segment (or even just a particular product that is performing poorly when purchased by Corporate customers) is removed. On the other hand, the East and West regions both saw increases in sales and profit. We need to look deeper into what is leading this growth.
+
+![Image of the YoY Region Chart](/Images/YoY_Region_Chart.png)
+
+# Product Category
+The Furniture needs to be investigated in more detail. The first and second and fourth year (this year) have large losses in YoY profit, but the third year has the biggest percentage of YoY growth among any category and year - 130%. These cause behind these extreme changes needs to be found before a decision can be made. The other categories performed just fine the past 2 years.
+
+![Image of the YoY Region Chart](/Images/YoY_Category_Chart.png)
+
+# Products
+I found the Top and Botton 10 products overall by both sales and profit. You can see in the Bottom 10 by Profit Chart [here](/Images/Bottom10_Products_Profit.png) that the majority of these products each year are in the Furniture category. Most of them are Tables.
 
 ---
 
 ## Next Steps
 * Update the top/bottom 10 product tables to see which specific subcategories to target or avoid
+* Look deeper into the Corporate customers' orders to see why exactly there's a loss in profit
+* Look deeper into the Central and South regions to see if it's connected to the Corporate customer segment
+* Look into the East and West regions to see what is contributing to the high profits
+* find the cause of the extreme YoY changes in the Furniture product category
 
 
