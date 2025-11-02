@@ -8,7 +8,6 @@
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Get Year-over-Year calculations for Total Sales and Total Profits by Region
 -- ---------------------------------------------------------------------------------------------------------------------------
-CREATE VIEW YoY_Regions AS
 WITH CTE AS
 	-- Get sum sales per region per year
 	(SELECT
@@ -33,14 +32,13 @@ LAGS AS
 SELECT
 	region,
 	order_year,
-	(total_sales - lag_sales) / lag_sales * 100 AS YoY_Sales,
-	(total_profit - lag_profit) / lag_profit * 100 AS YoY_profit
+	(total_sales - lag_sales) / lag_sales AS YoY_Sales, -- remove the 100's and let excel convert to pct
+	(total_profit - lag_profit) / lag_profit AS YoY_profit -- remove the 100's and let excel convert to pct
 FROM LAGS;
 
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- -- Get Year-over-Year calculations for Total Sales and Total Profits by Customer Segment
 -- ---------------------------------------------------------------------------------------------------------------------------
-CREATE VIEW YoY_Segments AS
 WITH CTE AS
 	-- Get sum sales per customer segment per year
 	(SELECT
@@ -65,14 +63,13 @@ LAGS AS
 SELECT
 	segment,
 	order_year,
-	(total_sales - lag_sales) / lag_sales * 100 AS YoY_Sales,
-	(total_profit - lag_profit) / lag_profit * 100 AS YoY_profit
+	(total_sales - lag_sales) / lag_sales AS YoY_Sales, -- remove the 100's and let excel convert to pct
+	(total_profit - lag_profit) / lag_profit AS YoY_profit -- remove the 100's and let excel convert to pct
 FROM LAGS;
 
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- -- Get Year-over-Year calculations for Total Sales and Total Profits by Category
 -- ---------------------------------------------------------------------------------------------------------------------------
-CREATE VIEW YoY_Categories AS
 WITH CTE AS
 	-- Get sum sales per category per year
 	(SELECT
@@ -97,160 +94,132 @@ LAGS AS
 SELECT
 	category,
 	order_year,
-	(total_sales - lag_sales) / lag_sales * 100 AS YoY_Sales,
-	(total_profit - lag_profit) / lag_profit * 100 AS YoY_profit
+	(total_sales - lag_sales) / lag_sales AS YoY_Sales, -- remove the 100's and let excel convert to pct
+	(total_profit - lag_profit) / lag_profit AS YoY_profit -- remove the 100's and let excel convert to pct
 FROM LAGS;
 
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Products - top 10 and bottom 10 in sales and profit each year
 --
--- UNION ALL used to prevent repeating the calculations. Bottom ranks have to be calculated separately with limit 10 because
--- all years have different rank numbers for their bottom 10 products. This leads to years being hard-coded for bottom
--- calculations. Since the database is small, it might be simpler to just repeat the calculations 4 times.
+-- [ALREADY CHANGED] UNION ALL used to prevent repeating the calculations. Bottom ranks have to be calculated separately with
+-- limit 10 because all years have different rank numbers for their bottom 10 products. This leads to years being hard-coded
+-- for bottom calculations. Since the database is small, it might be simpler to just repeat the calculations 4 times.
 -- ---------------------------------------------------------------------------------------------------------------------------
 
--- Get Total Sales and Total Profit of products by year
-CREATE VIEW Top_and_bottom_products AS
+-- Get Top 10 products by total sales per year
 WITH CTE AS
 	(SELECT
+		p.category,
 		p.product_name,
 		to_char(o.order_date, 'YYYY') AS order_year,
-		SUM(o.sales) AS total_sales,
+		SUM(o.sales) AS total_sales
+	FROM orders AS o
+		INNER JOIN products AS p
+			ON o.product_id = p.product_id
+	GROUP BY p.category, p.product_name, order_year),
+
+RANKINGS AS
+	-- Rank Total Sales of products by year
+	(SELECT
+		*,
+		ROW_NUMBER() OVER(PARTITION BY order_year ORDER BY total_sales DESC) AS sales_rankings
+	FROM CTE)
+
+SELECT -- Top 10 products by sales for each year
+	order_year,
+	product_name,
+	category,
+	total_sales AS totals,
+	sales_rankings
+FROM RANKINGS
+WHERE sales_rankings <= 10; -- if you LIMIT 10, it'll only capture 2015's top 10
+
+---
+
+-- Get Bottom 10 products by total sales per year
+WITH CTE AS
+	(SELECT
+		p.category,
+		p.product_name,
+		to_char(o.order_date, 'YYYY') AS order_year,
+		SUM(o.sales) AS total_sales
+	FROM orders AS o
+		INNER JOIN products AS p
+			ON o.product_id = p.product_id
+	GROUP BY p.category, p.product_name, order_year),
+
+RANKINGS AS
+	-- Rank Total Sales of products by year
+	(SELECT
+		*,
+		ROW_NUMBER() OVER(PARTITION BY order_year ORDER BY total_sales) AS sales_rankings
+	FROM CTE)
+
+SELECT -- Bottom 10 products by sales for each year
+	order_year,
+	product_name,
+	category,
+	total_sales AS totals,
+	sales_rankings
+FROM RANKINGS
+WHERE sales_rankings <= 10;
+
+---
+
+-- Get Top 10 products by total profits per year
+WITH CTE AS
+	(SELECT
+		p.category,
+		p.product_name,
+		to_char(o.order_date, 'YYYY') AS order_year,
 		SUM(o.profit) AS total_profit
 	FROM orders AS o
 		INNER JOIN products AS p
 			ON o.product_id = p.product_id
-	GROUP BY p.product_name, order_year),
+	GROUP BY p.category, p.product_name, order_year),
 
 RANKINGS AS
-	-- Rank Total Sales and Total Profit of products by year
+	-- Rank Total Profit of products by year
 	(SELECT
 		*,
-		ROW_NUMBER() OVER(PARTITION BY order_year ORDER BY total_sales DESC) AS sales_rankings,
 		ROW_NUMBER() OVER(PARTITION BY order_year ORDER BY total_profit DESC) AS profit_rankings
 	FROM CTE)
 
--- UNION ALL to get top 10 and bottom 10 products by sales and profit
-SELECT -- Top 10 products by sales for each year
-	'sales' AS metric,
+SELECT -- Top 10 products by profit for each year
 	order_year,
 	product_name,
-	total_sales AS totals,
-	sales_rankings
-FROM RANKINGS
-WHERE sales_rankings <= 10
-
-UNION ALL
-
-(SELECT -- Bottom 10 products by sales for 2015
-	'sales' AS metric,
-	order_year,
-	product_name,
-	total_sales AS totals,
-	sales_rankings
-FROM RANKINGS
-WHERE order_year = '2015'
-ORDER BY sales_rankings DESC
-LIMIT 10)
-
-UNION ALL
-
-(SELECT -- Bottom 10 products by sales for 2016
-	'sales' AS metric,
-	order_year,
-	product_name,
-	total_sales AS totals,
-	sales_rankings
-FROM RANKINGS
-WHERE order_year = '2016'
-ORDER BY sales_rankings DESC
-LIMIT 10)
-
-UNION ALL
-
-(SELECT -- Bottom 10 products by sales for 2017
-	'sales' AS metric,
-	order_year,
-	product_name,
-	total_sales AS totals,
-	sales_rankings
-FROM RANKINGS
-WHERE order_year = '2017'
-ORDER BY sales_rankings DESC
-LIMIT 10)
-
-UNION ALL
-
-(SELECT -- Bottom 10 products by sales for 2018
-	'sales' AS metric,
-	order_year,
-	product_name,
-	total_sales AS totals,
-	sales_rankings
-FROM RANKINGS
-WHERE order_year = '2018'
-ORDER BY sales_rankings DESC
-LIMIT 10)
-
-UNION ALL
-
-SELECT -- Top 10 products by profit for all years
-	'profit' AS metric,
-	order_year,
-	product_name,
+	category,
 	total_profit AS totals,
 	profit_rankings
 FROM RANKINGS
-WHERE profit_rankings <= 10
+WHERE profit_rankings <= 10; -- if you LIMIT 10, it'll only capture 2015's top 10
 
-UNION ALL
+---
 
-(SELECT -- Bottom 10 products by profit for 2015
-	'profit' AS metric,
+-- Get Bottom 10 products by total profits per year
+WITH CTE AS
+	(SELECT
+		p.category,
+		p.product_name,
+		to_char(o.order_date, 'YYYY') AS order_year,
+		SUM(o.profit) AS total_profit
+	FROM orders AS o
+		INNER JOIN products AS p
+			ON o.product_id = p.product_id
+	GROUP BY p.category, p.product_name, order_year),
+
+RANKINGS AS
+	-- Rank Total Profit of products by year
+	(SELECT
+		*,
+		ROW_NUMBER() OVER(PARTITION BY order_year ORDER BY total_profit) AS profit_rankings
+	FROM CTE)
+
+SELECT -- Bottom 10 products by profits for each year
 	order_year,
 	product_name,
-	total_sales AS totals,
+	category,
+	total_profit AS totals,
 	profit_rankings
 FROM RANKINGS
-WHERE order_year = '2015'
-ORDER BY profit_rankings DESC
-LIMIT 10)
-
-UNION ALL
-
-(SELECT -- Bottom 10 products by sales for 2016
-	'profit' AS metric,
-	order_year,
-	product_name,
-	total_sales AS totals,
-	profit_rankings
-FROM RANKINGS
-WHERE order_year = '2016'
-ORDER BY profit_rankings DESC
-LIMIT 10)
-
-UNION ALL
-
-(SELECT -- Bottom 10 products by sales for 2017
-	'profit' AS metric,
-	order_year,
-	product_name,
-	total_sales AS totals,
-	profit_rankings
-FROM RANKINGS
-WHERE order_year = '2017'
-ORDER BY profit_rankings DESC
-LIMIT 10)
-
-UNION ALL
-
-(SELECT -- Bottom 10 products by sales for 2018
-	'profit' AS metric,
-	order_year,
-	product_name,
-	total_sales AS totals,
-	profit_rankings
-FROM RANKINGS
-WHERE order_year = '2018'
-ORDER BY profit_rankings DESC
-LIMIT 10)	
+WHERE profit_rankings <= 10;
