@@ -4,7 +4,7 @@
 Due to the recent growth of competition in the market, RetailGiant wants to do an analysis to find out what works best
 for them.
 
-In my preliminary exploration, I discovered possible problem areas to investigate further. The areas of concern are: the Central and South regions, the Coporate customer segment, and the Furniture product category (specifically tables). A more thorough analysis must be done to track down the root cause of the major profit losses in these areas and to see if any of the losses in these areas are connected.
+In my preliminary exploration, I discovered possible problem areas to investigate further. The areas of concern are: the Central and South regions, the Coporate customer segment, and the Furniture product category (specifically tables). A more thorough analysis must be done to track down the root cause of the YoY decline in profits in these areas.
 
 ---
 
@@ -25,12 +25,12 @@ I received the data as an Excel Workbook where all of the tables are in their ow
 
 ## Results and Business Recommendations
 ### Customer Segment
-We need to re-evaluate our sales to our Corporate customer segment. It is the only segment to have a decrease in profit at all (this year - 2018), and the loss occured even with a 16% increase in Total Sales. The other two customer segments are both in the green; however, the Home Office segment had significant positive increase both last year (2017) and this year (2018). We should focus on maintaining our positive growth in the Home Office segment, and look into areas we can focus on to have greater growth in the Consumer segment next year.
+We need to dig deeper into our Corporate customer orders over the past 2 years. It is the only segment to have a decrease in profit at all (this year - 2018), and the decrease occured even with a 16% increase in Total Sales. The other two customer segments are both in the green; however, the Home Office segment had significant positive increase both last year (2017) and this year (2018). We should focus on growth of profit from out Corporate Customers.
 
 ![Image of the YoY Customer Segment Chart](/Images/YoY_Segment_Chart.png)
 
 ### Region
-Futher analysis needs to be done here. The South and Central regions saw significant decrease in profits (with the Central region also seeing a slight decrease in sales). The growth pattern in the South region is similar to the growth pattern of the Corporate customer segment, so it should be investigateed further if the removal of the Corporate customer segment (or even just a particular product that is performing poorly when purchased by Corporate customers) is removed. On the other hand, the East and West regions both saw increases in sales and profit. We need to look deeper into what is leading this growth.
+The South and Central regions saw significant decrease in profits (with the Central region also seeing a slight decrease in sales). On the other hand, the East and West regions both saw increases in sales and profit. We need to look deeper into what is leading this growth.
 
 ![Image of the YoY Region Chart](/Images/YoY_Region_Chart.png)
 
