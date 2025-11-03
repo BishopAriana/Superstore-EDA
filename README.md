@@ -1,15 +1,4 @@
-# Retail Store Exploratory Data Analysis
-
-## Executive Summary
-Due to the recent growth of competition in the market, RetailGiant wants to do an analysis to find out what works best
-for them.
-
-In my preliminary exploration, I discovered possible problem areas to investigate further. The areas of concern are: the Central and South regions, the Coporate customer segment, and the Furniture product category (specifically tables). A more thorough analysis must be done to track down the root cause of the YoY decline in profits in these areas.
-
----
-
-## Business Problem Outline
-Due to the recent growth of competition in the market, RetailGiant wants to do an analysis on all of their sales data since their inception in 2015 to find out what works best for them. They want to become more efficient in order to keep a leg up on the rising competition. They would like to understand which products, regions, categories and customer segments they should target or avoid.
+# Retail Store YoY Sales and YoY Profit Analysis
 
 ---
 
@@ -23,14 +12,14 @@ I received the data as an Excel Workbook where all of the tables are in their ow
 
 ---
 
-## Results and Business Recommendations
+## Results
 ### Customer Segment
-We need to dig deeper into our Corporate customer orders over the past 2 years. It is the only segment to have a decrease in profit at all (this year - 2018), and the decrease occured even with a 16% increase in Total Sales. The other two customer segments are both in the green; however, the Home Office segment had significant positive increase both last year (2017) and this year (2018). We should focus on growth of profit from out Corporate Customers.
+We need to dig deeper into our Corporate customer orders over the past 2 years. It is the only segment to have a decrease in profit at all (this year - 2018), and the decrease occured even with a 16% increase in Total Sales. The other two customer segments are both in the green; however, the Home Office segment had significant positive increase both last year (2017) and this year (2018). We should focus on growth of profit from our Corporate Customers.
 
 ![Image of the YoY Customer Segment Chart](/Images/YoY_Segment_Chart.png)
 
 ### Region
-The South and Central regions saw significant decrease in profits (with the Central region also seeing a slight decrease in sales). On the other hand, the East and West regions both saw increases in sales and profit. We need to look deeper into what is leading this growth.
+The South and Central regions saw significant decrease in profits in the past year (with the Central region also seeing a slight decrease in sales). On the other hand, the East and West regions both saw increases in sales and profit. We need to look deeper into what is leading this growth.
 
 ![Image of the YoY Region Chart](/Images/YoY_Region_Chart.png)
 
@@ -40,16 +29,14 @@ The Furniture category needs to be investigated in more detail. The second and f
 ![Image of the YoY Region Chart](/Images/YoY_Category_Chart.png)
 
 ### Products
-I found the Top 10 and Botton 10 products overall by both sales and profit. You can see in the Bottom 10 by Profit Chart [here](/Images/Bottom10_Products_Profit.png) that the majority of these products each year are in the Furniture category. Most of them are Tables. At the same time, none of the [bottom 10 products by sales](/Images/Bottom10_Products_Sales.png) have ever been a Furniture Product (it's mostly office supplies). Most of the top 10 products by [sales](/Images/Top10_Products_Sales.png) AND by [profit](/Images/Top10_Products_Profit.png) are in the Technology category. These are printers, copiers, and communication devices (phones and headsets). However, the interesting thing is that there are some Furniture products that are in the top 10 sales and profit, so I think there's something else that might be causing the massive profit loss in the Furniture category. We should narrow down the problem instead of avoiding the Furniture category altogether, and I recommend looking at the customer segment, the discount, and the quanities of Furniture orders.
+I found the Top 10 and Botton 10 products overall by both sales and profit. You can see in the Bottom 10 by Profit Chart [here](/Images/Bottom10_Products_Profit.png) that the majority of these products each year are in the Furniture category. Most of them are Tables. At the same time, none of the [bottom 10 products by sales](/Images/Bottom10_Products_Sales.png) have ever been a Furniture Product (it's mostly office supplies). Most of the top 10 products by [sales](/Images/Top10_Products_Sales.png) AND by [profit](/Images/Top10_Products_Profit.png) are in the Technology category. These are printers, copiers, and communication devices (phones and headsets). There are Furniture products in the top 10 product lists, so the category shouldn't be avoided altogether. I suggest a more thorough look into the Table and Bookcase subcategories.
 
 ---
 
 ## Next Steps
-* Update the top/bottom 10 product tables to see which specific subcategories to target or avoid
-* Look deeper into the Corporate customers' orders to see why exactly there's a loss in profit
-* Look deeper into the Central and South regions to see if it's connected to the Corporate customer segment
-* Look into the East and West regions to see what is contributing to the high profits
+* Look deeper into the Corporate customers' orders as well as South and East region orders to see why exactly there's a decrease in profit in the past year
+* Look into the East and West regions to see what is contributing to the high profit increase
 * Find the cause of the extreme YoY changes in the Furniture product category
-* See how the discount and quantities factor into any growth and losses
+
 
 
