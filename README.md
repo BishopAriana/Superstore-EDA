@@ -30,7 +30,7 @@ We need to re-evaluate our sales to our Corporate customer segment. It is the on
 ![Image of the YoY Customer Segment Chart](/Images/YoY_Segment_Chart.png)
 
 ### Region
-Futher analysis needs to be done here. The South and Central regions saw significant decrease in profits (with the Central region also seeing a slight decrease in sales). The growth patteern in the South region is similar to the growth pattern of the Corporate customer segment, so it should be investigateed further if the removal of the Corporate customer segment (or even just a particular product that is performing poorly when purchased by Corporate customers) is removed. On the other hand, the East and West regions both saw increases in sales and profit. We need to look deeper into what is leading this growth.
+Futher analysis needs to be done here. The South and Central regions saw significant decrease in profits (with the Central region also seeing a slight decrease in sales). The growth pattern in the South region is similar to the growth pattern of the Corporate customer segment, so it should be investigateed further if the removal of the Corporate customer segment (or even just a particular product that is performing poorly when purchased by Corporate customers) is removed. On the other hand, the East and West regions both saw increases in sales and profit. We need to look deeper into what is leading this growth.
 
 ![Image of the YoY Region Chart](/Images/YoY_Region_Chart.png)
 
